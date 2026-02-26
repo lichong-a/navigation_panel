@@ -1,0 +1,48 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs
+.next
+out
+dist
+build
+
+# Development
+*.log
+npm-debug.log*
+.pnpm-debug.log*
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Documentation
+docs
+*.md
+!README.md
+
+# Test
+coverage
+.nyc_output
+
+# Misc
+.DS_Store
+Thumbs.db
+*.tsbuildinfo
+.env.local
+.env.*.local
+
+# Data (will be mounted as volume)
+data

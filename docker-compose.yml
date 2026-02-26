@@ -1,0 +1,23 @@
+services:
+  ricpanel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ricpanel:latest
+    container_name: ricpanel
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      # Persist data directory
+      - ./data:/app/data
+    environment:
+      - NODE_ENV=production
+      # Optional: Set timezone
+      - TZ=Asia/Shanghai
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
