@@ -2,12 +2,27 @@
 
 ## 1. Docker 部署
 
-### 1.1 前置要求
+### 1.1 快速部署（使用 Docker Hub 镜像）
 
-- Docker 20.10+
-- Docker Compose 2.0+（可选）
+```bash
+# 拉取镜像
+docker pull lc1025082182/ricpanel:latest
+
+# 运行容器
+docker run -d \
+  --name ricpanel \
+  -p 3000:3000 \
+  -v $(pwd)/data:/app/data \
+  -e TZ=Asia/Shanghai \
+  --restart unless-stopped \
+  lc1025082182/ricpanel:latest
+```
 
 ### 1.2 使用 docker-compose 部署
+
+**前置要求**：
+- Docker 20.10+
+- Docker Compose 2.0+
 
 ```bash
 # 克隆项目

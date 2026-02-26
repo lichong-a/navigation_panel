@@ -43,7 +43,22 @@ pnpm start
 
 ### Docker 部署（推荐）
 
-#### 方式一：docker-compose（推荐）
+#### 方式一：直接拉取镜像
+
+```bash
+# 拉取镜像
+docker pull lc1025082182/ricpanel:latest
+
+# 运行容器
+docker run -d \
+  --name ricpanel \
+  -p 3000:3000 \
+  -v $(pwd)/data:/app/data \
+  --restart unless-stopped \
+  lc1025082182/ricpanel:latest
+```
+
+#### 方式二：docker-compose（推荐）
 
 ```bash
 # 构建并启动

@@ -1,9 +1,11 @@
 services:
   ricpanel:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: ricpanel:latest
+    # Use pre-built image from Docker Hub (recommended)
+    image: lc1025082182/ricpanel:latest
+    # Or build locally:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     container_name: ricpanel
     restart: unless-stopped
     ports:
