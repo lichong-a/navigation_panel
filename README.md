@@ -2,6 +2,8 @@
 
 一个简洁美观的个人导航网站，充满动效和 3D 效果。
 
+**GitHub**: https://github.com/lichong-a/navigation_panel
+
 ## 功能特性
 
 - 分组管理：创建、编辑、删除、拖拽排序

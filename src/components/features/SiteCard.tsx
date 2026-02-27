@@ -114,7 +114,7 @@ export function SiteCard({ site, index = 0, onEdit, onDelete }: SiteCardProps) {
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           className={cn(
-            'card-3d-inner relative p-4 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]',
+            'card-3d-inner relative p-4 rounded-xl bg-[var(--color-surface)]/75 border border-[var(--color-border)]',
             'transition-all duration-300 cursor-pointer',
             !isLoggedIn && 'hover:border-[var(--color-primary)] hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]',
             isLoggedIn && 'cursor-grab active:cursor-grabbing'

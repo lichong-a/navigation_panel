@@ -22,6 +22,7 @@ export function IconPicker({ value, onChange }: IconPickerProps) {
   const [loading, setLoading] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<string[]>([])
+  const [hasSearched, setHasSearched] = useState(false)
   const [faviconUrl, setFaviconUrl] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -98,6 +99,7 @@ export function IconPicker({ value, onChange }: IconPickerProps) {
     if (!searchQuery || !token) return
 
     setLoading(true)
+    setHasSearched(true)
     try {
       const result = await api.admin.searchIconify(token, searchQuery)
       setSearchResults(result.icons)
@@ -170,21 +172,27 @@ export function IconPicker({ value, onChange }: IconPickerProps) {
           </div>
 
           {/* 搜索结果或预设图标 */}
-          <div className="grid grid-cols-8 gap-2 max-h-48 overflow-y-auto p-2 rounded-lg bg-[var(--color-surface)]">
-            {(searchResults.length > 0 ? searchResults : presetIcons).map((icon) => (
-              <button
-                key={icon}
-                type="button"
-                onClick={() => onChange({ type: 'iconify', value: icon })}
-                className={cn(
-                  'p-2 rounded-lg hover:bg-[var(--color-surface-hover)] transition-colors',
-                  value.type === 'iconify' && value.value === icon && 'bg-[var(--color-primary)]/20 ring-1 ring-[var(--color-primary)]'
-                )}
-                title={icon}
-              >
-                <Icon icon={{ type: 'iconify', value: icon }} size={24} />
-              </button>
-            ))}
+          <div className="grid grid-cols-8 gap-2 max-h-48 overflow-y-auto p-2 rounded-lg bg-[var(--color-surface)] justify-items-center">
+            {hasSearched && searchResults.length === 0 ? (
+              <div className="col-span-8 text-center text-sm text-[var(--color-text-muted)] py-4">
+                未找到相关图标
+              </div>
+            ) : (
+              (searchResults.length > 0 ? searchResults : presetIcons).map((icon) => (
+                <button
+                  key={icon}
+                  type="button"
+                  onClick={() => onChange({ type: 'iconify', value: icon })}
+                  className={cn(
+                    'p-2 rounded-lg hover:bg-[var(--color-surface-hover)] transition-colors',
+                    value.type === 'iconify' && value.value === icon && 'bg-[var(--color-primary)]/20 ring-1 ring-[var(--color-primary)]'
+                  )}
+                  title={icon}
+                >
+                  <Icon icon={{ type: 'iconify', value: icon }} size={24} />
+                </button>
+              ))
+            )}
           </div>
         </div>
       )}

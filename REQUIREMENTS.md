@@ -94,10 +94,9 @@
 | **Next.js** | v15.x | 全栈框架（App Router） |
 | **TypeScript** | v5.x | 类型安全 |
 | **Tailwind CSS** | v4.x | 样式框架 |
-| **shadcn/ui** | latest | UI 组件库 |
-| **Three.js** | v0.170+ | 3D 效果 |
+| **Three.js** | v0.183+ | 3D 效果 |
 | **Framer Motion** | v12.x | 动画库 |
-| **Iconify** | v4.x | 图标系统 |
+| **Iconify** | v6.x | 图标系统 |
 | **Zustand** | v5.x | 状态管理 |
 
 ### 后端（Next.js App Router）

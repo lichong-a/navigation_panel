@@ -122,8 +122,18 @@ export function SiteEditDialog({ open, onClose, site, onSave }: SiteEditDialogPr
       onClose={onClose}
       title={site?.id ? '编辑网站' : '添加网站'}
       className="max-w-2xl"
+      footer={
+        <div className="flex justify-end gap-3">
+          <Button type="button" variant="secondary" onClick={onClose}>
+            取消
+          </Button>
+          <Button type="submit" form="site-form" disabled={loading}>
+            {loading ? '保存中...' : '保存'}
+          </Button>
+        </div>
+      }
     >
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form id="site-form" onSubmit={handleSubmit} className="space-y-5">
         {/* 基本信息 */}
         <div className="grid grid-cols-2 gap-4">
           <Select
@@ -243,16 +253,6 @@ export function SiteEditDialog({ open, onClose, site, onSave }: SiteEditDialogPr
           onChange={(checked) => setFormData((prev) => ({ ...prev, enabled: checked }))}
           label="启用"
         />
-
-        {/* 按钮 */}
-        <div className="flex justify-end gap-3 pt-2">
-          <Button type="button" variant="secondary" onClick={onClose}>
-            取消
-          </Button>
-          <Button type="submit" disabled={loading}>
-            {loading ? '保存中...' : '保存'}
-          </Button>
-        </div>
       </form>
     </Dialog>
   )

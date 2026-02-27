@@ -13,10 +13,11 @@ interface DialogProps {
   title?: string
   description?: string
   children: React.ReactNode
+  footer?: React.ReactNode
   className?: string
 }
 
-export function Dialog({ open, onClose, title, description, children, className }: DialogProps) {
+export function Dialog({ open, onClose, title, description, children, footer, className }: DialogProps) {
   // ESC 键关闭
   React.useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -53,14 +54,13 @@ export function Dialog({ open, onClose, title, description, children, className 
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.2 }}
             className={cn(
-              'relative bg-[var(--color-surface)] rounded-xl shadow-xl border border-[var(--color-border)] max-w-lg w-full max-h-[90vh] overflow-auto',
-              'backdrop-blur-xl',
+              'relative bg-[var(--color-surface)] rounded-xl shadow-xl border border-[var(--color-border)] max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden',
               className
             )}
           >
-            {/* 头部 */}
+            {/* 头部 - 磨砂背景 */}
             {(title || description) && (
-              <div className="sticky top-0 bg-[var(--color-surface)] px-6 py-4 border-b border-[var(--color-border)] flex items-start justify-between">
+              <div className="sticky top-0 z-10 px-6 py-4 border-b border-[var(--color-border)] flex items-start justify-between bg-[var(--color-surface)]/80 backdrop-blur-xl">
                 <div>
                   {title && <h2 className="text-lg font-semibold text-[var(--color-text)]">{title}</h2>}
                   {description && <p className="mt-1 text-sm text-[var(--color-text-muted)]">{description}</p>}
@@ -71,8 +71,15 @@ export function Dialog({ open, onClose, title, description, children, className 
               </div>
             )}
 
-            {/* 内容区 */}
-            <div className="p-6">{children}</div>
+            {/* 内容区 - 可滚动 */}
+            <div className="flex-1 overflow-auto p-6">{children}</div>
+
+            {/* 底部 - 磨砂背景 */}
+            {footer && (
+              <div className="sticky bottom-0 z-10 px-6 py-4 border-t border-[var(--color-border)] bg-[var(--color-surface)]/80 backdrop-blur-xl">
+                {footer}
+              </div>
+            )}
           </motion.div>
         </div>
       )}
