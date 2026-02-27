@@ -7,6 +7,9 @@ const CONFIG_PATH = path.join(DATA_DIR, 'config.json')
 const SITES_PATH = path.join(DATA_DIR, 'sites.json')
 const UPLOADS_DIR = path.join(DATA_DIR, 'uploads')
 
+// 内存缓存
+let sitesCache: SitesData | null = null
+
 // 确保数据目录存在
 async function ensureDataDir(): Promise<void> {
   await fs.mkdir(DATA_DIR, { recursive: true })
@@ -71,13 +74,21 @@ export async function isInitialized(): Promise<boolean> {
 // ============ Sites 操作 ============
 
 export async function readSites(): Promise<SitesData> {
+  // 缓存命中直接返回
+  if (sitesCache) {
+    return sitesCache
+  }
+
+  // 缓存未命中，读取文件
   await ensureDataDir()
   try {
     const content = await fs.readFile(SITES_PATH, 'utf-8')
-    return JSON.parse(content)
+    sitesCache = JSON.parse(content)
+    return sitesCache!
   } catch {
     const defaultSites = getDefaultSites()
     await fs.writeFile(SITES_PATH, JSON.stringify(defaultSites, null, 2))
+    sitesCache = defaultSites
     return defaultSites
   }
 }
@@ -85,6 +96,8 @@ export async function readSites(): Promise<SitesData> {
 export async function writeSites(data: SitesData): Promise<void> {
   await ensureDataDir()
   await fs.writeFile(SITES_PATH, JSON.stringify(data, null, 2))
+  // 清空缓存，下次读取时重新加载
+  sitesCache = null
 }
 
 // ============ 上传文件 ============
