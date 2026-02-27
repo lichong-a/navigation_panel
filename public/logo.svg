@@ -11,6 +11,6 @@
   </defs>
   <g filter="url(#shadow)">
     <rect x="4" y="4" width="40" height="40" rx="12" fill="url(#logoGrad)"/>
-    <text x="24" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="black" fill="white" text-anchor="middle">N</text>
+    <text x="24" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="black" fill="white" text-anchor="middle">R</text>
   </g>
 </svg>

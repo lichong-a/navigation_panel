@@ -1,134 +1,59 @@
-# RicPanel - 个人导航面板
+# RicPanel
 
-一个简洁美观的个人导航网站，充满动效和 3D 效果。
+<div align="center">
 
-**GitHub**: https://github.com/lichong-a/navigation_panel
+**极简 · 高性能 · 零依赖**
 
-## 功能特性
+一个现代化的个人导航面板
 
-- 分组管理：创建、编辑、删除、拖拽排序
-- 网站管理：标题、描述、图标、内网/外网地址、打开方式、标签
-- 图标支持：Iconify 搜索、上传图片、自动获取 Favicon
-- 内网/外网模式切换
-- 3D 粒子背景 + 卡片悬停效果
-- 数据导入导出
-- 单管理员认证
+[![Next.js](https://img.shields.io/badge/Next.js-15.5-black?logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-61dafb?logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript)](https://www.typescriptlang.org/)
+[![Docker](https://img.shields.io/badge/Docker-ready-2496ed?logo=docker)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-## 技术栈
+</div>
 
-- Next.js 15 + React 19
-- TypeScript 5
-- Tailwind CSS 4
-- React Three Fiber (3D)
-- Framer Motion (动画)
-- @dnd-kit (拖拽)
-- Zustand (状态管理)
-- JWT + bcrypt (认证)
+---
 
-## 快速开始
+## ✨ 特性
 
-```bash
-# 安装依赖
-pnpm install
+| 特性 | 说明 |
+|------|------|
+| 🚀 **高性能** | 服务端内存缓存，零重复 IO，毫秒级响应 |
+| 🪶 **轻量级** | Docker 镜像仅 ~150MB，无数据库依赖 |
+| 🔒 **零中间件** | 无需 Redis/MySQL/MongoDB，JSON 文件存储 |
+| 🎨 **3D 动效** | Three.js 粒子背景，Framer Motion 流畅动画 |
+| 📱 **响应式** | 完美适配桌面端与移动端 |
+| 🌓 **多主题** | 支持暗色/亮色/跟随系统三种模式 |
+| 🔄 **内外网** | 一键切换公网/内网地址 |
+| 📦 **数据迁移** | 一键导入导出，备份无忧 |
 
-# 开发模式
-pnpm dev
-
-# 构建
-pnpm build
-
-# 生产运行
-pnpm start
-```
-
-## 部署
-
-### Docker 部署（推荐）
-
-#### 方式一：直接拉取镜像
+## 🛠️ 快速开始
 
 ```bash
-# 拉取镜像
-docker pull lc1025082182/ricpanel:latest
+# Docker（推荐）
+docker run -d -p 3000:3000 -v $(pwd)/data:/app/data lc1025082182/ricpanel:latest
 
-# 运行容器
-docker run -d \
-  --name ricpanel \
-  -p 3000:3000 \
-  -v $(pwd)/data:/app/data \
-  --restart unless-stopped \
-  lc1025082182/ricpanel:latest
+# 或本地运行
+pnpm install && pnpm build && pnpm start
 ```
 
-#### 方式二：docker-compose（推荐）
+访问 `http://localhost:3000`，首次进入设置管理员账户即可使用。
 
-```bash
-# 构建并启动
-docker-compose up -d --build
+## 📖 文档
 
-# 查看日志
-docker-compose logs -f
+- [部署文档](docs/deployment.md) - Docker / PM2 部署指南
+- [常见问题](docs/faq.md) - 问题排查
 
-# 停止服务
-docker-compose down
-```
+## 📄 License
 
-#### 方式二：Docker 命令
+[MIT](LICENSE)
 
-```bash
-# 构建镜像
-docker build -t ricpanel:latest .
+---
 
-# 运行容器
-docker run -d \
-  --name ricpanel \
-  -p 3000:3000 \
-  -v $(pwd)/data:/app/data \
-  --restart unless-stopped \
-  ricpanel:latest
-```
+<div align="center">
 
-#### Docker 部署说明
+**[GitHub](https://github.com/lichong-a/navigation_panel)** · Star ⭐ 支持
 
-- 镜像基于 `node:20-alpine`，体积小，安全性高
-- 使用多阶段构建优化镜像大小
-- 数据持久化：`data/` 目录挂载到宿主机
-- 内置健康检查
-
-### PM2 部署
-
-```bash
-# 安装 PM2
-npm install -g pm2
-
-# 启动服务
-pm2 start pnpm --name ricpanel -- start
-
-# 开机自启
-pm2 startup
-pm2 save
-```
-
-## 数据存储
-
-- `data/config.json` - 管理员配置
-- `data/sites.json` - 分组和网站数据
-- `data/uploads/` - 上传的图标文件
-
-首次访问会自动进入初始化向导。
-
-## 环境变量
-
-| 变量名 | 说明 | 默认值 |
-|--------|------|--------|
-| PORT | 服务端口 | 3000 |
-| NODE_ENV | 运行环境 | development |
-| TZ | 时区 | - |
-
-## 常见问题
-
-参见 [docs/faq.md](docs/faq.md)
-
-## License
-
-MIT
+</div>
